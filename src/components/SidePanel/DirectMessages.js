@@ -93,8 +93,8 @@ class DirectMessages extends React.Component {
         <Menu.Item>
           <span>
             <Icon name="mail" /> DIRECT MESSAGES
-          </span>
-          {" | "}({users.length})
+          </span>{" "}
+          ({users.length})
         </Menu.Item>
         {users.map(user => (
           <Menu.Item

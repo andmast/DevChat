@@ -76,7 +76,7 @@ class MessageForm extends React.Component {
     if (this.props.isPrivateChannel) {
       return `chat/private-${this.state.channel.id}`;
     } else {
-      return `chat/public`;
+      return "chat/public";
     }
   };
 
@@ -144,14 +144,8 @@ class MessageForm extends React.Component {
   };
 
   render() {
-    const {
-      errors,
-      message,
-      loading,
-      modal,
-      uploadState,
-      percentUploaded
-    } = this.state;
+    // prettier-ignore
+    const { errors, message, loading, modal, uploadState, percentUploaded } = this.state;
 
     return (
       <Segment className="message__form">

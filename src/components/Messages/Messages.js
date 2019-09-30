@@ -104,9 +104,10 @@ class Messages extends React.Component {
       ? `${this.state.privateChannel ? "@" : "#"}${channel.name}`
       : "";
   };
+
   render() {
     // prettier-ignore
-    const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel} = this.state;
+    const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel } = this.state;
 
     return (
       <React.Fragment>

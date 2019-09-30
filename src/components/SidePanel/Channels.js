@@ -66,7 +66,7 @@ class Channels extends React.Component {
       .then(() => {
         this.setState({ channelName: "", channelDetails: "" });
         this.closeModal();
-        console.log("Channel Added");
+        console.log("channel added");
       })
       .catch(err => {
         console.error(err);
@@ -111,21 +111,21 @@ class Channels extends React.Component {
   isFormValid = ({ channelName, channelDetails }) =>
     channelName && channelDetails;
 
-  closeModal = () => this.setState({ modal: false });
-
   openModal = () => this.setState({ modal: true });
+
+  closeModal = () => this.setState({ modal: false });
 
   render() {
     const { channels, modal } = this.state;
+
     return (
       <React.Fragment>
         <Menu.Menu className="menu">
           <Menu.Item>
             <span>
               <Icon name="exchange" /> CHANNELS
-            </span>
-            {" | "}({channels.length}){" "}
-            <Icon name="add" onClick={this.openModal} />
+            </span>{" "}
+            ({channels.length}) <Icon name="add" onClick={this.openModal} />
           </Menu.Item>
           {this.displayChannels(channels)}
         </Menu.Menu>
@@ -143,6 +143,7 @@ class Channels extends React.Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
+
               <Form.Field>
                 <Input
                   fluid
@@ -158,7 +159,6 @@ class Channels extends React.Component {
             <Button color="green" inverted onClick={this.handleSubmit}>
               <Icon name="checkmark" /> Add
             </Button>
-
             <Button color="red" inverted onClick={this.closeModal}>
               <Icon name="remove" /> Cancel
             </Button>
