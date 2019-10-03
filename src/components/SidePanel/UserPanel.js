@@ -8,7 +8,9 @@ class UserPanel extends React.Component {
   state = {
     user: this.props.currentUser,
     modal: false,
-    previewImage: ""
+    previewImage: "",
+    croppedImage: "",
+    blob: ""
   };
 
   openModal = () => this.setState({ modal: true });
@@ -47,7 +49,17 @@ class UserPanel extends React.Component {
     }
   };
 
-  handleCropImage = () => {};
+  handleCropImage = () => {
+    if (this.AvatarEditor) {
+      this.AvatarEditor.getImageScaledToCanvas().toBlob(blob => {
+        let imageUrl = URL.createObjectURL(blob);
+        this.setState({
+          croppedImage: imageUrl,
+          blob
+        });
+      });
+    }
+  };
 
   handleSignout = () => {
     firebase
@@ -57,7 +69,7 @@ class UserPanel extends React.Component {
   };
 
   render() {
-    const { user, modal, previewImage } = this.state;
+    const { user, modal, previewImage, croppedImage } = this.state;
     const { primaryColor } = this.props;
 
     return (
@@ -109,14 +121,25 @@ class UserPanel extends React.Component {
                       />
                     )}
                   </Grid.Column>
-                  <Grid.Column>{/* Cropped Image Preview */}</Grid.Column>
+                  <Grid.Column>
+                    {croppedImage && (
+                      <Image
+                        style={{ margin: "3.5em auto" }}
+                        width={100}
+                        height={100}
+                        src={croppedImage}
+                      />
+                    )}
+                  </Grid.Column>
                 </Grid.Row>
               </Grid>
             </Modal.Content>
             <Modal.Actions>
-              <Button color="green" inverted>
-                <Icon name="save" /> Change Avatar
-              </Button>
+              {croppedImage && (
+                <Button color="green" inverted>
+                  <Icon name="save" /> Change Avatar
+                </Button>
+              )}
               <Button color="green" inverted onClick={this.handleCropImage}>
                 <Icon name="image" /> Preview
               </Button>
